@@ -7,7 +7,7 @@ vector<int>heuristic;
 
 void aStar(int source, int destination){
     string path = "";
-    path += (char)source;
+    path += to_string(source);
     int cost = 0;
 
     map<int, string>frontier;
@@ -20,9 +20,10 @@ void aStar(int source, int destination){
         path = itr->second;
         int index = path.length();
 
-        int u = (int)path[index-1] - 48;
+        int u = (int)path[index-1]-48;
         frontier.erase(itr);
-        cost = cost - heuristic[u];
+        cost -= heuristic[u];
+        
 
         if(u == destination){
             cout<<path<<" is the best path costing: "<<cost<<endl;
@@ -31,9 +32,8 @@ void aStar(int source, int destination){
 
         for(int i=0; i<adjList[u].size(); i++){
             int v = adjList[u][i].first;
-            path += (char)v;
-            cost = cost + adjList[u][i].second + heuristic[v];
-            frontier.insert(make_pair(cost, path));
+            int newCost = cost + adjList[u][i].second + heuristic[v];
+            frontier.insert(make_pair(newCost, path+to_string(v)));
         }
 
     }
@@ -60,6 +60,8 @@ int main(){
         fin>>heuristic[i];
         //cout<<heuristic[i]<<endl;
     }
+
+    aStar(0, 7);
 
 
 
