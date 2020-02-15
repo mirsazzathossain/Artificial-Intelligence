@@ -4,11 +4,12 @@ using namespace std;
 
 vector<vector<pair<int, int>>>adjList;
 vector<int>heuristic;
+vector<char>dictionary;
 
 void aStar(int source, int destination){
     string path = "";
     path += to_string(source);
-    int cost = 0;
+    int cost = heuristic[source];
 
     map<int, string>frontier;
     frontier.insert(make_pair(cost, path));
@@ -26,7 +27,11 @@ void aStar(int source, int destination){
         
 
         if(u == destination){
-            cout<<path<<" is the best path costing: "<<cost<<endl;
+            for(int i=0; i<path.length(); i++){
+                int j = (int)path[i] - 48;
+                cout<<dictionary[j];
+            }
+            cout<<" is the best path costing: "<<cost<<endl;
             break;
         }
 
@@ -54,6 +59,12 @@ int main(){
         adjList[u].push_back(make_pair(v, w));
     }
 
+    dictionary.resize(vertices);
+
+    for(int i=0; i<vertices; i++){
+        fin>>dictionary[i];
+    }
+
     heuristic.resize(vertices);
 
     for(int i=0; i<vertices; i++){
@@ -61,7 +72,10 @@ int main(){
         //cout<<heuristic[i]<<endl;
     }
 
-    aStar(0, 7);
+    int source, destination;
+    fin>>source>>destination;
+
+    aStar(source, destination);
 
 
 
