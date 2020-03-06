@@ -12,3 +12,5 @@ Run the code using any IDE (VS Code Suggested) that support cpp. Keep the "input
 
 # Output
 You will get one line containing the minimum cost path with cost in your console.
+Sample output of our given input:
+(2,1) -> (3,1) -> (4,1) -> (5,1) -> (5,2) -> (5,3) -> (5,4) -> (5,5) is the best path costing: 10
